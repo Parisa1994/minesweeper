@@ -6,10 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>minesweeper</title>
 </head>
-<body> 
+<body>
+    <!-- start body -->
     <div class="container">
-        <h1>hello</h1>
+        <!--start newGame-->
+        <div class="center-flex  start"  id="">
+            <select class="start__row mb-2" id="cells">
+                <option>5*5</option>
+                <option>6*6</option>
+                <option>7*7</option>
+                <option>8*8</option>
+                <option>9*9</option>
+            </select>
+            <select class="start__level mb-4" id="lavel">
+                <option>Easy</option>
+                <option>Medium</option>
+                <option>Hard</option>
+            </select>
+            <button class="btn-game"> Start</button>
+        </div>
+        <!--end newGame-->
+        <!--start Game-->
+        <div class="hide">
+
+        </div>
+        <!--end Game-->
+
     </div>
-<script src="/scripts/script.js"></script>
+    <!--end body-->
+    <!-- script src-->
+    <script src="/scripts/script.js"></script>
 </body>
 </html>

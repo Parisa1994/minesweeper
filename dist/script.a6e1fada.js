@@ -194,7 +194,12 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./../fonts/fontawesome-webfont.eot":[["fontawesome-webfont.af69b5ff.eot","node_modules/font-awesome/fonts/fontawesome-webfont.eot"],"node_modules/font-awesome/fonts/fontawesome-webfont.eot"],"./../fonts/fontawesome-webfont.woff2":[["fontawesome-webfont.b54ed0f7.woff2","node_modules/font-awesome/fonts/fontawesome-webfont.woff2"],"node_modules/font-awesome/fonts/fontawesome-webfont.woff2"],"./../fonts/fontawesome-webfont.woff":[["fontawesome-webfont.b1f459e7.woff","node_modules/font-awesome/fonts/fontawesome-webfont.woff"],"node_modules/font-awesome/fonts/fontawesome-webfont.woff"],"./../fonts/fontawesome-webfont.ttf":[["fontawesome-webfont.13bba0a5.ttf","node_modules/font-awesome/fonts/fontawesome-webfont.ttf"],"node_modules/font-awesome/fonts/fontawesome-webfont.ttf"],"./../fonts/fontawesome-webfont.svg":[["fontawesome-webfont.c0864c1b.svg","node_modules/font-awesome/fonts/fontawesome-webfont.svg"],"node_modules/font-awesome/fonts/fontawesome-webfont.svg"],"_css_loader":"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../.config/yarn/global/node_modules/process/browser.js":[function(require,module,exports) {
+},{"./../fonts/fontawesome-webfont.eot":[["fontawesome-webfont.af69b5ff.eot","node_modules/font-awesome/fonts/fontawesome-webfont.eot"],"node_modules/font-awesome/fonts/fontawesome-webfont.eot"],"./../fonts/fontawesome-webfont.woff2":[["fontawesome-webfont.b54ed0f7.woff2","node_modules/font-awesome/fonts/fontawesome-webfont.woff2"],"node_modules/font-awesome/fonts/fontawesome-webfont.woff2"],"./../fonts/fontawesome-webfont.woff":[["fontawesome-webfont.b1f459e7.woff","node_modules/font-awesome/fonts/fontawesome-webfont.woff"],"node_modules/font-awesome/fonts/fontawesome-webfont.woff"],"./../fonts/fontawesome-webfont.ttf":[["fontawesome-webfont.13bba0a5.ttf","node_modules/font-awesome/fonts/fontawesome-webfont.ttf"],"node_modules/font-awesome/fonts/fontawesome-webfont.ttf"],"./../fonts/fontawesome-webfont.svg":[["fontawesome-webfont.c0864c1b.svg","node_modules/font-awesome/fonts/fontawesome-webfont.svg"],"node_modules/font-awesome/fonts/fontawesome-webfont.svg"],"_css_loader":"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"node_modules/bootstrap/dist/css/bootstrap.min.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../.config/yarn/global/node_modules/process/browser.js":[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {}; // cached from whatever global is present so that test runners that stub it
@@ -11013,10 +11018,12 @@ require("./../styles/main.scss");
 
 require("font-awesome/css/font-awesome.min.css");
 
+require("bootstrap/dist/css/bootstrap.min.css");
+
 var _jquery = _interopRequireDefault(require("jquery"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./../styles/main.scss":"styles/main.scss","font-awesome/css/font-awesome.min.css":"node_modules/font-awesome/css/font-awesome.min.css","jquery":"node_modules/jquery/dist/jquery.js"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./../styles/main.scss":"styles/main.scss","font-awesome/css/font-awesome.min.css":"node_modules/font-awesome/css/font-awesome.min.css","bootstrap/dist/css/bootstrap.min.css":"node_modules/bootstrap/dist/css/bootstrap.min.css","jquery":"node_modules/jquery/dist/jquery.js"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -11044,7 +11051,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50167" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55942" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

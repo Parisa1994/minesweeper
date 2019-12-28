@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn init
+  /usr/local/bin/node /usr/local/bin/yarn add bootstrap.min.css
 
 PATH: 
-  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/opt/X11/bin
+  /var/folders/3x/cmzh5ctn5f92h1dv5yzg9knr0000gp/T/yarn--1577537742708-0.1779473247628509:/Users/parisazamani/Projects/practice-js/minesweeper-github/node_modules/.bin:/Users/parisazamani/.config/yarn/link/node_modules/.bin:/usr/local/libexec/lib/node_modules/npm/bin/node-gyp-bin:/usr/local/lib/node_modules/npm/bin/node-gyp-bin:/usr/local/bin/node_modules/npm/bin/node-gyp-bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/opt/X11/bin
 
 Yarn version: 
   1.15.2
@@ -14,17 +14,17 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: canceled
-      at Interface.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:125801:13)
-      at Interface.emit (events.js:182:13)
-      at Interface._ttyWrite (readline.js:783:16)
-      at ReadStream.onkeypress (readline.js:168:10)
-      at ReadStream.emit (events.js:182:13)
-      at emitKeys (internal/readline.js:424:14)
-      at emitKeys.next (<anonymous>)
-      at ReadStream.onData (readline.js:1022:36)
-      at ReadStream.emit (events.js:182:13)
-      at addChunk (_stream_readable.js:283:12)
+  Error: https://registry.yarnpkg.com/bootstrap.min.css: Not found
+      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66058:18)
+      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:129541:22)
+      at Request.emit (events.js:182:13)
+      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:130513:10)
+      at Request.emit (events.js:182:13)
+      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:130435:12)
+      at Object.onceWrapper (events.js:273:13)
+      at IncomingMessage.emit (events.js:187:15)
+      at endReadableNT (_stream_readable.js:1094:12)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
 
 npm manifest: 
   {
