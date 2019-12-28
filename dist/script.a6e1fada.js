@@ -11023,6 +11023,33 @@ require("bootstrap/dist/css/bootstrap.min.css");
 var _jquery = _interopRequireDefault(require("jquery"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//================hide class and show===========
+(0, _jquery.default)('#start').on('click', function () {
+  (0, _jquery.default)('#game').removeClass('hide');
+  (0, _jquery.default)('#startGame').addClass('hide');
+  var cellsGame = (0, _jquery.default)('#cells').val();
+  config.row = cellsGame;
+  config.col = cellsGame;
+  generateGame(config.row, config.col, config.bomb, config.score);
+}); //==================value===================
+
+var config = {
+  row: null,
+  col: null,
+  bomb: null,
+  score: null
+}; //=================generateGame=========
+
+function generateGame(row, col, bomb, score) {
+  var wrap = document.querySelector(".wrap");
+
+  for (var i = 0; i < config.row; i++) {
+    for (var j = 0; j < config.col; j++) {
+      [i][j] = (0, _jquery.default)('<span class="text-center border home"><span>').appendTo(".wrap");
+    }
+  }
+}
 },{"./../styles/main.scss":"styles/main.scss","font-awesome/css/font-awesome.min.css":"node_modules/font-awesome/css/font-awesome.min.css","bootstrap/dist/css/bootstrap.min.css":"node_modules/bootstrap/dist/css/bootstrap.min.css","jquery":"node_modules/jquery/dist/jquery.js"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

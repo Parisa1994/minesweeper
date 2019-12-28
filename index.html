@@ -10,28 +10,29 @@
     <!-- start body -->
     <div class="container">
         <!--start newGame-->
-        <div class="center-flex  start"  id="">
+        <div class="center-flex start"  id="startGame">
             <select class="start__row mb-2" id="cells">
-                <option>5*5</option>
-                <option>6*6</option>
-                <option>7*7</option>
-                <option>8*8</option>
-                <option>9*9</option>
+                <option value="5">5*5</option>
+                <option value="6">6*6</option>
+                <option value="7">7*7</option>
+                <option value="8">8*8</option>
+                <option value="9">9*9</option>
+                <option value="10">10*10</option>
             </select>
             <select class="start__level mb-4" id="lavel">
-                <option>Easy</option>
-                <option>Medium</option>
-                <option>Hard</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
             </select>
-            <button class="btn-game"> Start</button>
+            <button class="btn-game" id="start"> Start</button>
         </div>
         <!--end newGame-->
         <!--start Game-->
-        <div class="hide">
-
+        <div class="hide" id="game">
+            <div class="mt-5 row wrap">
+            </div>
         </div>
         <!--end Game-->
-
     </div>
     <!--end body-->
     <!-- script src-->
