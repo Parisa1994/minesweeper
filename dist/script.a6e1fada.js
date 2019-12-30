@@ -11061,9 +11061,20 @@ function generateGame(row, col, bomb, score) {
 
   var Bomb = generateBomb();
   Bomb.forEach(function (item) {
-    (0, _jquery.default)(".wrap").find('span:nth-child(' + (item + 1) + ')').attr('databomb', 'true');
+    (0, _jquery.default)(".wrap").find('span:nth-child(' + (item + 1) + ')').attr('data-bomb', 'true');
   });
-  console.log(Bomb);
+  console.log(Bomb); //css
+
+  (0, _jquery.default)('.wrap span').on('click', function () {
+    var isBomb = (0, _jquery.default)(this).data('bomb');
+
+    if (isBomb) {
+      (0, _jquery.default)('.wrap span[data-bomb=true]').css('background-color', 'red');
+      (0, _jquery.default)('.wrap').addClass('disabled');
+    } else {
+      (0, _jquery.default)(this).css('background-color', 'green');
+    }
+  });
 } //====================randomfunction=============
 
 

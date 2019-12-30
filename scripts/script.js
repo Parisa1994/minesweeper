@@ -38,9 +38,20 @@ function generateGame(row, col, bomb, score){
     //bomb
     var Bomb = generateBomb();
     Bomb.forEach(item => {
-        $(".wrap").find('span:nth-child('+(item + 1 )+')').attr('databomb', 'true');
+        $(".wrap").find('span:nth-child('+(item + 1 )+')').attr('data-bomb', 'true');
     });
     console.log(Bomb);
+    //css
+    $('.wrap span').on('click', function(){
+        const isBomb = $(this).data('bomb');
+        if(isBomb){
+            $('.wrap span[data-bomb=true]').css('background-color', 'red');
+            $('.wrap').addClass('disabled');
+        }else{
+            $(this).css('background-color', 'green');
+
+        }
+    })
 }
 
 //====================randomfunction=============
