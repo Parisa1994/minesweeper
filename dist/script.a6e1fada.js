@@ -11034,6 +11034,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   var TotalCells = config.row * config.col;
   var levelGame = (0, _jquery.default)("#lavel").val();
   config.bomb = Math.floor(TotalCells * difficulty[levelGame] / 100);
+  config.score = Math.floor(TotalCells * 10 / 100);
   generateGame(config.row, config.col, config.bomb, config.score);
 }); //==================value===================
 
@@ -11047,7 +11048,7 @@ var difficulty = {
   hard: 80,
   medium: 50,
   easy: 30
-}; //=================generateGame=========
+}; //=================generateGame==============
 
 function generateGame(row, col, bomb, score) {
   var wrap = document.querySelector(".wrap");
@@ -11065,12 +11066,20 @@ function generateGame(row, col, bomb, score) {
   var Bomb = generateBomb();
   Bomb.forEach(function (item) {
     (0, _jquery.default)(".wrap").find('span:nth-child(' + (item + 1) + ')').attr('data-bomb', 'true');
+  }); //score 
+
+  var Score = generateScore();
+  Score.forEach(function (element) {
+    (0, _jquery.default)(".wrap").find('span:nth-child(' + (element + 1) + ')').attr('data-score', randomDefault(10, 20));
   });
+  console.log('score' + score);
   console.log(Bomb); //css
 
   (0, _jquery.default)('.wrap span').on('click', function () {
     var isBomb = (0, _jquery.default)(this).data('bomb');
     var isEnd = (0, _jquery.default)('.wrap').hasClass('disabled');
+    var isScore = (0, _jquery.default)(this).data('score');
+    (0, _jquery.default)('.wrap span[data-score]').css('background-color', 'blue');
 
     if (!isEnd) {
       if (isBomb) {
@@ -11079,6 +11088,8 @@ function generateGame(row, col, bomb, score) {
         alert(' you are losed :( ');
       } else {
         (0, _jquery.default)(this).css('background-color', 'green');
+        var totalScore = isScore ? Number((0, _jquery.default)('#score b').text()) + isScore : Number((0, _jquery.default)('#score b').text()) + 5;
+        (0, _jquery.default)("#score b").html(totalScore);
       }
     }
   });
@@ -11105,7 +11116,27 @@ function generateBomb() {
   }
 
   return Bomb;
-} //=============restart=====================
+} //=====================generateScore===========
+
+
+function generateScore() {
+  var Score = [];
+  var TotalCells = config.row * config.col;
+  var Bomb = generateBomb();
+  var ranBomb = generateBomb();
+
+  for (var i = 0; i < config.score; i++) {
+    var ranScore = randomDefault(0, TotalCells);
+
+    if (Score.indexOf(ranScore) === -1 && Bomb.indexOf(ranBomb) === -1) {
+      Score.push(ranScore);
+    } else {
+      Score.push(ranScore(0, TotalCells));
+    }
+  }
+
+  return Score;
+} //=============restart====================
 
 
 (0, _jquery.default)('#newGame').on('click', function () {

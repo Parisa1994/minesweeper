@@ -12,6 +12,7 @@ $('#start').on('click', function(){
     const TotalCells = config.row * config.col;
     var levelGame = $("#lavel").val();
     config.bomb = Math.floor((TotalCells * difficulty[levelGame]) / 100);
+    config.score = Math.floor((TotalCells * 10) / 100);
     generateGame(config.row, config.col, config.bomb, config.score);
 
 })
@@ -28,7 +29,7 @@ var difficulty = {
     easy: 30
 }
 
-//=================generateGame=========
+//=================generateGame==============
 function generateGame(row, col, bomb, score){
     const wrap = document.querySelector(".wrap");
     $(".wrap").html("");
@@ -44,11 +45,21 @@ function generateGame(row, col, bomb, score){
     Bomb.forEach(item => {
         $(".wrap").find('span:nth-child('+(item + 1 )+')').attr('data-bomb', 'true');
     });
+
+    //score 
+    var Score = generateScore();
+    Score.forEach(element => {
+        $(".wrap").find('span:nth-child('+ (element + 1) +')').attr('data-score', randomDefault(10, 20));
+    })    
+    console.log('score' + score);
+
     console.log(Bomb);
     //css
     $('.wrap span').on('click', function(){
         const isBomb = $(this).data('bomb');
         const isEnd = $('.wrap').hasClass('disabled');
+        const isScore = $(this).data('score');
+        $('.wrap span[data-score]').css('background-color', 'blue')
 
         if(!isEnd){
             if(isBomb){
@@ -57,6 +68,8 @@ function generateGame(row, col, bomb, score){
                 alert(' you are losed :( ');
             }else{
                 $(this).css('background-color', 'green');
+                const totalScore =  isScore ?  Number($('#score b').text()) + isScore : Number($('#score b').text()) + 5 ;
+                $("#score b").html(totalScore);
         }
         }
     })
@@ -81,8 +94,24 @@ function generateBomb(){
     }
     return Bomb;
 }
+//=====================generateScore===========
+function generateScore(){
+    var Score = [];
+    var TotalCells = config.row * config.col;
+    var Bomb = generateBomb();
+    var ranBomb = generateBomb();
+    for(let i = 0; i < config.score; i++){
+        const ranScore = randomDefault(0, TotalCells);
+        if(Score.indexOf(ranScore) === -1 && Bomb.indexOf(ranBomb) === -1){
+            Score.push(ranScore);
+        }else{
+            Score.push(ranScore(0, TotalCells));
+        }
+    }
+    return Score;
+}
 
-//=============restart=====================
+//=============restart====================
 $('#newGame').on('click', function(){
     $('#game').addClass('hide');
     $('#startGame').removeClass('hide');
