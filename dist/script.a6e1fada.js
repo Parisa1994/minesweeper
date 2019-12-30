@@ -11139,9 +11139,18 @@ function generateScore() {
 } //=============restart====================
 
 
+(0, _jquery.default)('#restart').on('click', function () {
+  generateGame(config.row, config.col, config.bomb, config.score);
+  (0, _jquery.default)('.wrap').removeClass('disabled');
+  (0, _jquery.default)('#score b').html('0');
+  var isScore = (0, _jquery.default)(this).data('score');
+}); //=============newGame===========
+
 (0, _jquery.default)('#newGame').on('click', function () {
-  (0, _jquery.default)('#game').addClass('hide');
-  (0, _jquery.default)('#startGame').removeClass('hide');
+  (0, _jquery.default)("#game").addClass("hide");
+  (0, _jquery.default)("#startGame").removeClass("hide");
+  (0, _jquery.default)('.wrap').removeClass('disabled');
+  (0, _jquery.default)('#score b').html('0');
 });
 },{"./../styles/main.scss":"styles/main.scss","font-awesome/css/font-awesome.min.css":"node_modules/font-awesome/css/font-awesome.min.css","bootstrap/dist/css/bootstrap.min.css":"node_modules/bootstrap/dist/css/bootstrap.min.css","jquery":"node_modules/jquery/dist/jquery.js"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];

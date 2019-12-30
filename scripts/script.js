@@ -112,8 +112,16 @@ function generateScore(){
 }
 
 //=============restart====================
-$('#newGame').on('click', function(){
-    $('#game').addClass('hide');
-    $('#startGame').removeClass('hide');
+$('#restart').on('click', function(){
+    generateGame(config.row, config.col, config.bomb, config.score);
+    $('.wrap').removeClass('disabled');
+    $('#score b').html('0');
+    const isScore = $(this).data('score');
 })
-
+//=============newGame===========
+$('#newGame').on('click', function(){
+    $("#game").addClass("hide");
+    $("#startGame").removeClass("hide");
+    $('.wrap').removeClass('disabled');
+    $('#score b').html('0');
+})
