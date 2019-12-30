@@ -41,29 +41,28 @@ function generateGame(row, col, bomb, score){
         $(".wrap").find('span:nth-child('+(item + 1 )+')').attr('databomb', 'true');
     });
     console.log(Bomb);
-
 }
 
 //====================randomfunction=============
 function randomDefault(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
-
 //==================generateBomb================
-function generateBomb (){
+function generateBomb(){
     var  Bomb = [];
     var TotalCells = config.row * config.col; 
 
-    for(var i = 0; i < config.bomb ; i++){
+    for(let i = 0; i < config.bomb; i++){
         const ranBomb = randomDefault(0, TotalCells);
         if(Bomb.indexOf(ranBomb) === -1){
             Bomb.push(ranBomb);
         }else {
-            Bomb.push(ranBomb(0, TotalCells));
+            Bomb.push(randomDefault(0, TotalCells));
         }
     }
     return Bomb;
 }
+
 //=============restart=====================
 $('#newGame').on('click', function(){
     $('#game').addClass('hide');

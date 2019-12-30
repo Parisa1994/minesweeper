@@ -11082,7 +11082,7 @@ function generateBomb() {
     if (Bomb.indexOf(ranBomb) === -1) {
       Bomb.push(ranBomb);
     } else {
-      Bomb.push(ranBomb(0, TotalCells));
+      Bomb.push(randomDefault(0, TotalCells));
     }
   }
 
