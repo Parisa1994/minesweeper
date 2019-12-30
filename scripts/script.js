@@ -19,11 +19,11 @@ var config = {
     bomb: 10,
     score: null
 }
-// var difficulty = {
-//     hard,
-//     medium,
-//     esay
-// }
+var difficulty = {
+    hard: 80,
+    medium: 50,
+    esay: 30
+}
 //=================generateGame=========
 function generateGame(row, col, bomb, score){
     const wrap = document.querySelector(".wrap");
@@ -44,12 +44,16 @@ function generateGame(row, col, bomb, score){
     //css
     $('.wrap span').on('click', function(){
         const isBomb = $(this).data('bomb');
-        if(isBomb){
-            $('.wrap span[data-bomb=true]').css('background-color', 'red');
-            $('.wrap').addClass('disabled');
-        }else{
-            $(this).css('background-color', 'green');
+        const isEnd = $('.wrap').hasClass('disabled');
 
+        if(!isEnd){
+            if(isBomb){
+                $('.wrap span[data-bomb=true]').css('background-color', 'red');
+                $('.wrap').addClass('disabled');
+                alert(' you are losed :( ');
+            }else{
+                $(this).css('background-color', 'green');
+        }
         }
     })
 }

@@ -11039,12 +11039,12 @@ var config = {
   col: null,
   bomb: 10,
   score: null
-}; // var difficulty = {
-//     hard,
-//     medium,
-//     esay
-// }
-//=================generateGame=========
+};
+var difficulty = {
+  hard: 80,
+  medium: 50,
+  esay: 30
+}; //=================generateGame=========
 
 function generateGame(row, col, bomb, score) {
   var wrap = document.querySelector(".wrap");
@@ -11067,12 +11067,16 @@ function generateGame(row, col, bomb, score) {
 
   (0, _jquery.default)('.wrap span').on('click', function () {
     var isBomb = (0, _jquery.default)(this).data('bomb');
+    var isEnd = (0, _jquery.default)('.wrap').hasClass('disabled');
 
-    if (isBomb) {
-      (0, _jquery.default)('.wrap span[data-bomb=true]').css('background-color', 'red');
-      (0, _jquery.default)('.wrap').addClass('disabled');
-    } else {
-      (0, _jquery.default)(this).css('background-color', 'green');
+    if (!isEnd) {
+      if (isBomb) {
+        (0, _jquery.default)('.wrap span[data-bomb=true]').css('background-color', 'red');
+        (0, _jquery.default)('.wrap').addClass('disabled');
+        alert(' you are losed :( ');
+      } else {
+        (0, _jquery.default)(this).css('background-color', 'green');
+      }
     }
   });
 } //====================randomfunction=============
