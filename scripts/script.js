@@ -14,21 +14,19 @@ $('#start').on('click', function(){
     config.bomb = Math.floor((TotalCells * difficulty[levelGame]) / 100);
     config.score = Math.floor((TotalCells * 10) / 100);
     generateGame(config.row, config.col, config.bomb, config.score);
-
 })
 //==================value===================
 var config = {
     row: null,
     col: null,
     bomb: null,
-    score: null
+    score: 0
 }
 var difficulty = {
     hard: 80,
     medium: 50,
     easy: 30
 }
-
 //=================generateGame==============
 function generateGame(row, col, bomb, score){
     const wrap = document.querySelector(".wrap");
@@ -51,9 +49,8 @@ function generateGame(row, col, bomb, score){
     Score.forEach(element => {
         $(".wrap").find('span:nth-child('+ (element + 1) +')').attr('data-score', randomDefault(10, 20));
     })    
-    console.log('score' + score);
-
-    console.log(Bomb);
+    console.log('score' + Score);
+    console.log( 'bomb' + Bomb);
     //css
     $('.wrap span').on('click', function(){
         const isBomb = $(this).data('bomb');
@@ -79,33 +76,30 @@ function generateGame(row, col, bomb, score){
 function randomDefault(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
+//=====================variables===========
+var Score = [];
+var  Bomb = [];
+var TotalCells = config.row * config.col; 
+const ranCells = randomDefault(0, TotalCells);
+
 //==================generateBomb================
 function generateBomb(){
-    var  Bomb = [];
-    var TotalCells = config.row * config.col; 
-
     for(let i = 0; i < config.bomb; i++){
-        const ranBomb = randomDefault(0, TotalCells);
-        if(Bomb.indexOf(ranBomb) === -1){
-            Bomb.push(ranBomb);
+        if(Bomb.indexOf(ranCells) === -1){
+            Bomb.push(ranCells);
         }else {
-            Bomb.push(randomDefault(0, TotalCells));
+            Bomb.push(randomDefault(0, TotalCells))
         }
     }
     return Bomb;
 }
 //=====================generateScore===========
 function generateScore(){
-    var Score = [];
-    var TotalCells = config.row * config.col;
-    var Bomb = generateBomb();
-    var ranBomb = generateBomb();
     for(let i = 0; i < config.score; i++){
-        const ranScore = randomDefault(0, TotalCells);
-        if(Score.indexOf(ranScore) === -1 && Bomb.indexOf(ranBomb) === -1){
-            Score.push(ranScore);
+        if(Score.indexOf(ranCells) === -1 && Bomb.indexOf(ranCells) === -1){
+            Score.push(ranCells);
         }else{
-            Score.push(ranScore(0, TotalCells));
+            Score.push(randomDefault(0, TotalCells));
         }
     }
     return Score;
@@ -118,6 +112,7 @@ $('#restart').on('click', function(){
     $('#score b').html('0');
     const isScore = $(this).data('score');
 })
+
 //=============newGame===========
 $('#newGame').on('click', function(){
     $("#game").addClass("hide");

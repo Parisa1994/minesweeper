@@ -11042,7 +11042,7 @@ var config = {
   row: null,
   col: null,
   bomb: null,
-  score: null
+  score: 0
 };
 var difficulty = {
   hard: 80,
@@ -11072,8 +11072,8 @@ function generateGame(row, col, bomb, score) {
   Score.forEach(function (element) {
     (0, _jquery.default)(".wrap").find('span:nth-child(' + (element + 1) + ')').attr('data-score', randomDefault(10, 20));
   });
-  console.log('score' + score);
-  console.log(Bomb); //css
+  console.log('score' + Score);
+  console.log('bomb' + Bomb); //css
 
   (0, _jquery.default)('.wrap span').on('click', function () {
     var isBomb = (0, _jquery.default)(this).data('bomb');
@@ -11098,18 +11098,18 @@ function generateGame(row, col, bomb, score) {
 
 function randomDefault(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
-} //==================generateBomb================
+} //=====================variables===========
 
+
+var Score = [];
+var Bomb = [];
+var TotalCells = config.row * config.col;
+var ranCells = randomDefault(0, TotalCells); //==================generateBomb================
 
 function generateBomb() {
-  var Bomb = [];
-  var TotalCells = config.row * config.col;
-
   for (var i = 0; i < config.bomb; i++) {
-    var ranBomb = randomDefault(0, TotalCells);
-
-    if (Bomb.indexOf(ranBomb) === -1) {
-      Bomb.push(ranBomb);
+    if (Bomb.indexOf(ranCells) === -1) {
+      Bomb.push(ranCells);
     } else {
       Bomb.push(randomDefault(0, TotalCells));
     }
@@ -11120,18 +11120,11 @@ function generateBomb() {
 
 
 function generateScore() {
-  var Score = [];
-  var TotalCells = config.row * config.col;
-  var Bomb = generateBomb();
-  var ranBomb = generateBomb();
-
   for (var i = 0; i < config.score; i++) {
-    var ranScore = randomDefault(0, TotalCells);
-
-    if (Score.indexOf(ranScore) === -1 && Bomb.indexOf(ranBomb) === -1) {
-      Score.push(ranScore);
+    if (Score.indexOf(ranCells) === -1 && Bomb.indexOf(ranCells) === -1) {
+      Score.push(ranCells);
     } else {
-      Score.push(ranScore(0, TotalCells));
+      Score.push(randomDefault(0, TotalCells));
     }
   }
 
@@ -11180,7 +11173,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50396" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54909" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
