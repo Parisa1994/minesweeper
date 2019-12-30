@@ -60,7 +60,7 @@ select {
 }
 
 .header {
-  display: flex;
+  display: grid;
 }
 .header p {
   float: left;
@@ -73,13 +73,18 @@ select {
 .header .restart, .header .newGame {
   float: right;
   background-color: #640ae5;
-  width: 50%;
+  width: 100%;
   border: none;
   color: white;
-  font-size: 1.3rem;
-  margin: 18px 6px;
+  margin: 5px 0;
   font-weight: 300;
   border-radius: 4px;
+  font-size: 1rem;
+  padding: 10px;
+}
+.header .restart:focus, .header .newGame:focus {
+  box-shadow: none;
+  outline: none;
 }
 /*!
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
