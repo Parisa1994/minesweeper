@@ -16,9 +16,14 @@ $('#start').on('click', function(){
 var config = {
     row: null,
     col: null,
-    bomb: null,
+    bomb: 10,
     score: null
 }
+// var difficulty = {
+//     hard,
+//     medium,
+//     esay
+// }
 //=================generateGame=========
 function generateGame(row, col, bomb, score){
     const wrap = document.querySelector(".wrap")
@@ -29,5 +34,32 @@ function generateGame(row, col, bomb, score){
     }
     wrap.style.setProperty("width", config.row*50 + "px");
     wrap.style.setProperty("heigth", config.col*50 + "px");
+    //bomb
+    var Bomb = generateBomb();
+    Bomb.forEach(item => {
+        $(".wrap").find('span:nth-child('+(item + 1 )+')').attr('databomb', 'true');
+    });
+    console.log(Bomb);
 
+}
+
+//====================randomfunction=============
+function randomDefault(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+//==================generateBomb================
+function generateBomb (){
+    var  Bomb = [];
+    var TotalCells = config.row * config.col; 
+
+    for(var i = 0; i < config.bomb ; i++){
+        var ranBomb = randomDefault(0, TotalCells);
+        if(Bomb.indexOf(ranBomb) === -1){
+            Bomb.push(ranBomb);
+        }else {
+            Bomb.push(ranBomb(0, TotalCells));
+        }
+    }
+    return Bomb;
 }
