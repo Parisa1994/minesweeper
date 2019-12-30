@@ -11048,6 +11048,7 @@ var config = {
 
 function generateGame(row, col, bomb, score) {
   var wrap = document.querySelector(".wrap");
+  (0, _jquery.default)(".wrap").html("");
 
   for (var i = 0; i < config.row; i++) {
     for (var j = 0; j < config.col; j++) {
@@ -11086,7 +11087,13 @@ function generateBomb() {
   }
 
   return Bomb;
-}
+} //=============restart=====================
+
+
+(0, _jquery.default)('#newGame').on('click', function () {
+  (0, _jquery.default)('#game').addClass('hide');
+  (0, _jquery.default)('#startGame').removeClass('hide');
+});
 },{"./../styles/main.scss":"styles/main.scss","font-awesome/css/font-awesome.min.css":"node_modules/font-awesome/css/font-awesome.min.css","bootstrap/dist/css/bootstrap.min.css":"node_modules/bootstrap/dist/css/bootstrap.min.css","jquery":"node_modules/jquery/dist/jquery.js"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

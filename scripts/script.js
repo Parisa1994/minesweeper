@@ -26,7 +26,8 @@ var config = {
 // }
 //=================generateGame=========
 function generateGame(row, col, bomb, score){
-    const wrap = document.querySelector(".wrap")
+    const wrap = document.querySelector(".wrap");
+    $(".wrap").html("");
     for(var i = 0; i < config.row; i++){
         for(var j=0; j < config.col; j++){
             [i][j] = $('<span class="text-center border home"><span>').appendTo(".wrap");
@@ -54,7 +55,7 @@ function generateBomb (){
     var TotalCells = config.row * config.col; 
 
     for(var i = 0; i < config.bomb ; i++){
-        var ranBomb = randomDefault(0, TotalCells);
+        const ranBomb = randomDefault(0, TotalCells);
         if(Bomb.indexOf(ranBomb) === -1){
             Bomb.push(ranBomb);
         }else {
@@ -63,3 +64,9 @@ function generateBomb (){
     }
     return Bomb;
 }
+//=============restart=====================
+$('#newGame').on('click', function(){
+    $('#game').addClass('hide');
+    $('#startGame').removeClass('hide');
+})
+
