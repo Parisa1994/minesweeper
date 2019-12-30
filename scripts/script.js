@@ -9,6 +9,9 @@ $('#start').on('click', function(){
     var cellsGame = $('#cells').val();
     config.row = cellsGame;
     config.col = cellsGame;
+    const TotalCells = config.row * config.col;
+    var levelGame = $("#lavel").val();
+    config.bomb = Math.floor((TotalCells * difficulty[levelGame]) / 100);
     generateGame(config.row, config.col, config.bomb, config.score);
 
 })
@@ -16,14 +19,15 @@ $('#start').on('click', function(){
 var config = {
     row: null,
     col: null,
-    bomb: 10,
+    bomb: null,
     score: null
 }
 var difficulty = {
     hard: 80,
     medium: 50,
-    esay: 30
+    easy: 30
 }
+
 //=================generateGame=========
 function generateGame(row, col, bomb, score){
     const wrap = document.querySelector(".wrap");

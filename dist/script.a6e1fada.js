@@ -11031,19 +11031,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   var cellsGame = (0, _jquery.default)('#cells').val();
   config.row = cellsGame;
   config.col = cellsGame;
+  var TotalCells = config.row * config.col;
+  var levelGame = (0, _jquery.default)("#lavel").val();
+  config.bomb = Math.floor(TotalCells * difficulty[levelGame] / 100);
   generateGame(config.row, config.col, config.bomb, config.score);
 }); //==================value===================
 
 var config = {
   row: null,
   col: null,
-  bomb: 10,
+  bomb: null,
   score: null
 };
 var difficulty = {
   hard: 80,
   medium: 50,
-  esay: 30
+  easy: 30
 }; //=================generateGame=========
 
 function generateGame(row, col, bomb, score) {
