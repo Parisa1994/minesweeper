@@ -11049,6 +11049,9 @@ function generateGame(row, col, bomb, score) {
       [i][j] = (0, _jquery.default)('<span class="text-center border home"><span>').appendTo(".wrap");
     }
   }
+
+  wrap.style.setProperty("width", config.row * 50 + "px");
+  wrap.style.setProperty("heigth", config.col * 50 + "px");
 }
 },{"./../styles/main.scss":"styles/main.scss","font-awesome/css/font-awesome.min.css":"node_modules/font-awesome/css/font-awesome.min.css","bootstrap/dist/css/bootstrap.min.css":"node_modules/bootstrap/dist/css/bootstrap.min.css","jquery":"node_modules/jquery/dist/jquery.js"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -11078,7 +11081,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55942" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50396" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

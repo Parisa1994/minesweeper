@@ -27,7 +27,7 @@ function generateGame(row, col, bomb, score){
             [i][j] = $('<span class="text-center border home"><span>').appendTo(".wrap");
         }
     }
+    wrap.style.setProperty("width", config.row*50 + "px");
+    wrap.style.setProperty("heigth", config.col*50 + "px");
 
 }
-
-
