@@ -12,17 +12,17 @@
         <!--start newGame-->
         <div class="center-flex start" id="startGame">
             <select class="start__row mb-2" id="cells">
-                <option value="5">5*5</option>
-                <option value="6">6*6</option>
-                <option value="7">7*7</option>
-                <option value="8">8*8</option>
-                <option value="9">9*9</option>
-                <option value="10">10*10</option>
+                <option value="5" id="5">5*5</option>
+                <option value="6" id="6">6*6</option>
+                <option value="7" id="7">7*7</option>
+                <option value="8" id="8">8*8</option>
+                <option value="9" id="9">9*9</option>
+                <option value="10" id="10">10*10</option>
             </select>
             <select class="start__level mb-4" id="lavel">
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
+                <option value="easy" id="easy">Easy</option>
+                <option value="medium" id="medium">Medium</option>
+                <option value="hard" id="hard">Hard</option>
             </select>
             <button class="btn-game" id="start"> Start</button>
         </div>
@@ -34,7 +34,7 @@
                 <button class="newGame" id="newGame">NewGame</button>
                 <button class="restart" id="restart"> Restart</button>
             </div>
-            <div class="mt-5 row wrap">
+            <div class="mt-5 row wrap" id="cellsWrap">
             </div>
         </div>
         <!--end Game-->
