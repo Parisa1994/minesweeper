@@ -221,7 +221,7 @@ require("bootstrap/dist/css/bootstrap.min.css");
 //     medium: 50,
 //     easy: 30
 // }
-//================hide class and show with jquery===========
+//================hide class and show ===========
 // $('#start').on('click', function(){
 //     $('#game').removeClass('hide');
 //     $('#startGame').addClass('hide');
@@ -234,7 +234,7 @@ require("bootstrap/dist/css/bootstrap.min.css");
 //     config.score = Math.floor((TotalCells * 10) / 100);
 //     generateGame();
 // })
-//=================generateGame jquery===================
+//=================generateGame===================
 // function generateGame(){
 //     const wrap = document.querySelector(".wrap");
 //     wrap.innerHTML = '';
@@ -285,7 +285,7 @@ require("bootstrap/dist/css/bootstrap.min.css");
 //     return Math.floor(Math.random() * (max - min + 1) ) + min;
 // }
 //var  Bomb = [];
-//==================generateBomb jquery=========================
+//==================generateBomb=========================
 // function generateBomb(){
 //    var  Bomb = [];
 //    var TotalCells = config.row * config.col; 
@@ -299,7 +299,7 @@ require("bootstrap/dist/css/bootstrap.min.css");
 //     }
 //     return Bomb;
 // }
-//=====================generateScore jquery===================
+//=====================generateScore===================
 // function generateScore(){
 //     var Score = [];
 //     var TotalCells = config.row * config.col; 
@@ -313,14 +313,14 @@ require("bootstrap/dist/css/bootstrap.min.css");
 //     }
 //     return Score;
 // }
-//===================restart with jquery=============================
+//===================restart with =============================
 // $('#restart').on('click', function(){
 //     generateGame(config.row, config.col, config.bomb, config.score);
 //     $('.wrap').removeClass('disabled');
 //     $('#score b').html('0');
 //     const isScore = $(this).data('score');
 // })
-//==================newGame with jquery==============================
+//==================newGame with ==============================
 // $('#newGame').on('click', function(){
 //     $("#game").addClass("hide");
 //     $("#startGame").removeClass("hide");
@@ -332,14 +332,14 @@ require("bootstrap/dist/css/bootstrap.min.css");
 var config = {
   row: null,
   col: null,
-  bomb: 10,
+  bomb: null,
   score: null
-}; // var difficulty = {
-//     easy: 30,
-//     medium: 50,
-//     haed: 80
-// }
-
+};
+var difficulty = {
+  easy: 30,
+  medium: 50,
+  haed: 80
+};
 var wrap = document.querySelector(".wrap"); //================hide class and show=============
 
 function start() {
@@ -349,6 +349,8 @@ function start() {
   config.row = cellsGame;
   config.col = cellsGame;
   var lavel = document.getElementById("lavel").value;
+  var TotalCells = config.row * config.col;
+  config.bomb = Math.floor(TotalCells * difficulty[lavel] / 100);
   generateGame();
 }
 
@@ -377,12 +379,19 @@ function generateGame() {
       wrap.querySelectorAll('span:nth-child(' + (item + 1) + ')')[0].setAttribute('data-bomb', 'true');
     }
   });
-} //=============random defalut=======
+  console.log("bomb: " + Bomb); //css
+
+  function addStyle() {
+    document.querySelector('.wrap span[data-bomb=true]').setAttribute('backgroundColor', 'red');
+  }
+
+  document.querySelector('.wrap span').addEventListener("click", addStyle);
+} //=============random defalut========
 
 
 function randomDefault(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
-} //============generate bomb =====
+} //============generate bomb =========
 
 
 function generateBomb() {
