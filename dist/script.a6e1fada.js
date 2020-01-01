@@ -284,14 +284,13 @@ require("bootstrap/dist/css/bootstrap.min.css");
 // function randomDefault(min, max) {
 //     return Math.floor(Math.random() * (max - min + 1) ) + min;
 // }
-//=====================variables jquery =========================
-// var Score = [];
-// var  Bomb = [];
-// var TotalCells = config.row * config.col; 
-// const ranCells = randomDefault(0, TotalCells);
+//var  Bomb = [];
 //==================generateBomb jquery=========================
 // function generateBomb(){
+//    var  Bomb = [];
+//    var TotalCells = config.row * config.col; 
 //     for(let i = 0; i < config.bomb; i++){
+//         const ranCells = randomDefault(0, TotalCells);
 //         if(Bomb.indexOf(ranCells) === -1){
 //             Bomb.push(ranCells);
 //         }else {
@@ -302,7 +301,10 @@ require("bootstrap/dist/css/bootstrap.min.css");
 // }
 //=====================generateScore jquery===================
 // function generateScore(){
+//     var Score = [];
+//     var TotalCells = config.row * config.col; 
 //     for(let i = 0; i < config.score; i++){
+//     const ranCells = randomDefault(0, TotalCells);
 //         if(Score.indexOf(ranCells) === -1 && Bomb.indexOf(ranCells) === -1){
 //             Score.push(ranCells);
 //         }else{
@@ -370,12 +372,11 @@ function generateGame() {
   wrap.style.setProperty("heigth", config.col * 50 + "px"); //bomb
 
   var Bomb = generateBomb();
-  var cellsWrap = document.getElementById("cellsWrap");
-  var cellsChild = cellsWrap.querySelectorAll("span");
   Bomb.forEach(function (item) {
-    cellsChild[1].setAttribute("data-bomb", "true"); // cellsWrap.find('cellsChild:nth-child(' + item + ')').setAttribute("data-bomb", "true");
+    if (wrap.querySelectorAll('span:nth-child(' + (item + 1) + ')')[0]) {
+      wrap.querySelectorAll('span:nth-child(' + (item + 1) + ')')[0].setAttribute('data-bomb', 'true');
+    }
   });
-  console.log(Bomb);
 } //=============random defalut=======
 
 
