@@ -338,7 +338,7 @@ var config = {
 var difficulty = {
   easy: 30,
   medium: 50,
-  haed: 80
+  hard: 80
 };
 var wrap = document.querySelector(".wrap"); //================hide class and show=============
 
@@ -350,9 +350,8 @@ function start() {
   config.col = cellsGame;
   var lavel = document.getElementById("lavel").value;
   var TotalCells = config.row * config.col;
-  config.bomb = Math.floor(TotalCells * difficulty[lavel] / 100);
-  config.score = Math.floor(TotalCells * 10) / 100;
-  console.log("fucking score: " + config.score);
+  config.bomb = Math.ceil(Math.floor(TotalCells * difficulty[lavel] / 100));
+  config.score = Math.ceil(Math.floor(TotalCells * 10) / 100);
   generateGame();
 }
 
@@ -375,22 +374,35 @@ function generateGame() {
   wrap.style.setProperty("width", config.row * 50 + "px");
   wrap.style.setProperty("heigth", config.col * 50 + "px"); //bomb
 
-  var Bomb = generateBomb();
+  var GEN_RES = generateBomb();
+  var Bomb = GEN_RES.Bomb;
   var Cells = document.querySelectorAll('.wrap span');
   Bomb.forEach(function (item) {
-    if (wrap.querySelectorAll('span:nth-child(' + (item + 1) + ')')[0]) {
-      wrap.querySelectorAll('span:nth-child(' + (item + 1) + ')')[0].setAttribute('data-bomb', 'true');
+    if (wrap.querySelector('span:nth-child(' + (item + 1) + ')')) {
+      wrap.querySelector('span:nth-child(' + (item + 1) + ')').setAttribute('data-bomb', 'true');
     }
-  });
-  console.log("bomb: " + Bomb); //score
+  }); //score
 
-  var Score = generateScore();
+  var Score = GEN_RES.Score;
   Score.forEach(function (element) {
-    if (wrap.querySelectorAll('span:nth-child(' + (element + 1) + ')')[0]) {
-      wrap.querySelectorAll('span:nth-child( ' + (element + 1) + ' )')[0].setAttribute('data-score', 'true');
+    if (wrap.querySelector('span:nth-child(' + (element + 1) + ')')) {
+      wrap.querySelector('span:nth-child( ' + (element + 1) + ' )').setAttribute('data-score', 'true');
     }
   });
-  console.log("score:" + Score); //css
+
+  Array.prototype.diff = function (arr2) {
+    var ret = [];
+
+    for (var i in this) {
+      if (arr2.indexOf(this[i]) > -1) {
+        ret.push(this[i]);
+      }
+    }
+
+    return ret;
+  };
+
+  console.log(Bomb.diff(Score), Score, Bomb); //css
 
   function cellClick() {
     var isBomb = this.getAttribute('data-bomb');
@@ -415,12 +427,17 @@ function generateGame() {
         return;
       } else if (isScore) {
         console.log('This is a score');
-        this.style.backgroundColor = "blue";
+        this.style.backgroundColor = "blue"; // const scoreYou = document.querySelector("#score b");
+        // const totalScore = Number(scoreYou.textContent()) + isScore;
+        // scoreyou.innerHTML(totalScore);
+
         return;
       }
 
       console.log('Normal');
-      this.style.backgroundColor = "green";
+      this.style.backgroundColor = "green"; // const scoreYou = document.querySelector("#score b");
+      // const totalScore = Number(scoreYou.textContent) + 5 ;
+      // scoreyou.innerHTML(totalScore);
     }
   }
 
@@ -431,39 +448,38 @@ function generateGame() {
 
 
 function randomDefault(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * (max - min)) + min;
+  ;
 } //============generate bomb ===========
 
 
 function generateBomb() {
   var Bomb = [];
+  var Score = [];
   var CellCount = config.row * config.col;
 
-  for (var i = 0; i < config.bomb; i++) {
+  while (Bomb.length < config.bomb) {
     var RND = randomDefault(0, CellCount);
-
-    if (Bomb.indexOf(RND) === -1) {
-      Bomb.push(RND);
-    } else {
-      Bomb.push(randomDefault(0, CellCount));
-    }
+    if (Bomb.indexOf(RND) === -1) Bomb.push(RND);
   }
 
-  return Bomb;
+  Score = generateScore(Bomb);
+  return {
+    Score: Score,
+    Bomb: Bomb
+  };
 } //=========generate score=============
 
 
-function generateScore() {
+function generateScore(Bombs) {
   var Score = [];
   var CellsCount = config.row * config.col;
 
-  for (var i = 0; i < config.score; i++) {
+  while (Score.length < config.score) {
     var RND = randomDefault(0, CellsCount);
 
-    if (Score.indexOf(RND) === -1) {
+    if (Score.indexOf(RND) === -1 && Bombs.indexOf(RND) === -1) {
       Score.push(RND);
-    } else {
-      Score.push(randomDefault(0, CellsCount));
     }
   }
 

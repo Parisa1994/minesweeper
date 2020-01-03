@@ -92,6 +92,9 @@ select{
     background: #ccc;
 }
 
-// span[data-score]{
-//     background-color:purple;
-// }
+span[data-score]{
+    background-color:purple;
+}
+span[data-bomb]{
+    background-color:red;
+}

@@ -145,10 +145,11 @@ var config = {
     bomb: null,
     score: null
 }
+
 var difficulty = {
     easy: 30,
     medium: 50,
-    haed: 80
+    hard: 80
 }
 const wrap = document.querySelector(".wrap");
 //================hide class and show=============
@@ -160,9 +161,8 @@ function start(){
     config.col = cellsGame;
     var lavel = document.getElementById("lavel").value;
     const TotalCells = config.row * config.col;
-    config.bomb = Math.floor((TotalCells * difficulty[lavel]) / 100);
-    config.score = Math.floor(TotalCells * 10 ) / 100;
-    console.log( "fucking score: " + config.score)
+    config.bomb = Math.ceil(Math.floor((TotalCells * difficulty[lavel]) / 100));
+    config.score = Math.ceil(Math.floor(TotalCells * 10 ) / 100);
     generateGame();
 };
 
@@ -179,27 +179,39 @@ function generateGame(){
             wrap.appendChild(a);
         }
     }
+
     wrap.style.setProperty("width", config.row*50 + "px");
     wrap.style.setProperty("heigth", config.col*50 + "px");
 
     //bomb
-    const Bomb = generateBomb();
+    const GEN_RES = generateBomb();
+    const Bomb = GEN_RES.Bomb;
     const Cells = document.querySelectorAll('.wrap span');
     Bomb.forEach(item => {
-        if(wrap.querySelectorAll('span:nth-child('+ (item + 1) +')')[0]){
-            wrap.querySelectorAll('span:nth-child('+ (item + 1) +')')[0].setAttribute('data-bomb', 'true')
+        if(wrap.querySelector('span:nth-child('+ (item + 1) +')')){
+            wrap.querySelector('span:nth-child('+ (item + 1) +')').setAttribute('data-bomb', 'true')
         }
     });
-    console.log("bomb: " + Bomb);
 
     //score
-    const Score = generateScore();
+    const Score = GEN_RES.Score;
     Score.forEach(element => {
-        if(wrap.querySelectorAll('span:nth-child('+ (element + 1) +')')[0]){
-            wrap.querySelectorAll('span:nth-child( '+ (element + 1) +' )')[0].setAttribute('data-score', 'true');
+        if(wrap.querySelector('span:nth-child('+ (element + 1) +')')){
+            wrap.querySelector('span:nth-child( '+ (element + 1) +' )').setAttribute('data-score', 'true');
         }
-    })
-    console.log( "score:" + Score)
+    });
+
+    Array.prototype.diff = function(arr2) {
+        var ret = [];
+        for(var i in this) {   
+            if(arr2.indexOf(this[i]) > -1){
+                ret.push(this[i]);
+            }
+        }
+        return ret;
+    };
+
+    console.log(Bomb.diff(Score), Score, Bomb)
 
     //css
     function cellClick(){
@@ -219,13 +231,20 @@ function generateGame(){
                 }
                 wrap.classList.add('disabled');
                 return;
+
             }else if(isScore){
                 console.log('This is a score');
                 this.style.backgroundColor = "blue";
+                // const scoreYou = document.querySelector("#score b");
+                // const totalScore = Number(scoreYou.textContent()) + isScore;
+                // scoreyou.innerHTML(totalScore);
                 return;
             }
             console.log('Normal');
                 this.style.backgroundColor = "green";
+                // const scoreYou = document.querySelector("#score b");
+                // const totalScore = Number(scoreYou.textContent) + 5 ;
+                // scoreyou.innerHTML(totalScore);
             }
     }
 
@@ -233,38 +252,46 @@ function generateGame(){
         Cells[i].addEventListener('click', cellClick.bind(Cells[i]));
     }
 }
+
 //=============random defalut==========
 function randomDefault(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
+    return Math.floor(Math.random() * (max - min) ) + min;;
 }
+
 //============generate bomb ===========
 function generateBomb(){
     var Bomb = [];
+    var Score = [];
     const CellCount = config.row * config.col;
-    for(let i = 0; i < config.bomb; i++){
+
+    while(Bomb.length < config.bomb){
         const RND = randomDefault(0, CellCount);
-        if(Bomb.indexOf(RND) === -1){
-            Bomb.push(RND);
-        }else {
-            Bomb.push(randomDefault(0, CellCount))
-        }
+        if( Bomb.indexOf(RND) === -1 ) Bomb.push(RND);
     }
-    return Bomb;
+
+    Score = generateScore(Bomb);
+
+    return {
+        Score,
+        Bomb
+    };
 }
+
 //=========generate score=============
-function generateScore(){
+function generateScore(Bombs){
     var Score = [];
     const CellsCount = config.row * config.col;
-    for( let i = 0; i < config.score; i++){
+    while(Score.length < config.score){
         const RND = randomDefault(0, CellsCount);
-        if( Score.indexOf(RND) === -1 ){
+
+        if( Score.indexOf(RND) === -1 && Bombs.indexOf(RND) === -1 ) {
             Score.push(RND);
-        }else{
-            Score.push(randomDefault(0, CellsCount))
         }
     }
+
     return Score;
 }
+
 //==================restart button===========
 const restart = document.getElementById("restart");
 restart.addEventListener('click', function(){
