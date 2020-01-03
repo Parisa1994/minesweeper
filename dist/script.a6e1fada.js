@@ -374,6 +374,7 @@ function generateGame() {
   wrap.style.setProperty("heigth", config.col * 50 + "px"); //bomb
 
   var Bomb = generateBomb();
+  var Cells = document.querySelectorAll('.wrap span');
   Bomb.forEach(function (item) {
     if (wrap.querySelectorAll('span:nth-child(' + (item + 1) + ')')[0]) {
       wrap.querySelectorAll('span:nth-child(' + (item + 1) + ')')[0].setAttribute('data-bomb', 'true');
@@ -381,17 +382,45 @@ function generateGame() {
   });
   console.log("bomb: " + Bomb); //css
 
-  function addStyle() {
-    document.querySelector('.wrap span[data-bomb=true]').setAttribute('backgroundColor', 'red');
+  function cellClick() {
+    var isBomb = this.getAttribute('data-bomb');
+    var isScore = this.getAttribute('data-score');
+    var isEnd = document.getElementsByClassName('disabled');
+
+    if (!isEnd.length) {
+      if (isBomb) {
+        var CellsBomb = document.querySelectorAll('.wrap span[data-bomb]');
+
+        for (var _i = 0; _i < CellsBomb.length; _i++) {
+          CellsBomb[_i].style.backgroundColor = "red";
+        }
+
+        alert(" you lose :(");
+
+        for (var _i2 = 0; _i2 < Cells.length; _i2++) {
+          Cells[_i2].classList.add('disabled');
+        }
+
+        wrap.classList.add('disabled');
+        return;
+      } else if (isScore) {
+        console.log('This is a score');
+      }
+
+      console.log('Normal');
+      this.style.backgroundColor = "green";
+    }
   }
 
-  document.querySelector('.wrap span').addEventListener("click", addStyle);
-} //=============random defalut========
+  for (var _i3 = 0; _i3 < Cells.length; _i3++) {
+    Cells[_i3].addEventListener('click', cellClick.bind(Cells[_i3]));
+  }
+} //=============random defalut==========
 
 
 function randomDefault(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
-} //============generate bomb =========
+} //============generate bomb ===========
 
 
 function generateBomb() {
@@ -438,7 +467,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54088" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49550" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

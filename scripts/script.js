@@ -183,6 +183,7 @@ function generateGame(){
 
     //bomb
     const Bomb = generateBomb();
+    const Cells = document.querySelectorAll('.wrap span');
     Bomb.forEach(item => {
         if(wrap.querySelectorAll('span:nth-child('+ (item + 1) +')')[0]){
             wrap.querySelectorAll('span:nth-child('+ (item + 1) +')')[0].setAttribute('data-bomb', 'true')
@@ -190,19 +191,40 @@ function generateGame(){
     });
     console.log("bomb: " + Bomb);
     //css
-    function addStyle(){
-    document.querySelector('.wrap span[data-bomb=true]').setAttribute('backgroundColor', 'red');
+    function cellClick(){
+        const isBomb = this.getAttribute('data-bomb');
+        const isScore = this.getAttribute('data-score');
+        const isEnd  = document.getElementsByClassName('disabled');
 
+        if(!isEnd.length){
+            if(isBomb){
+                const CellsBomb = document.querySelectorAll('.wrap span[data-bomb]');
+                for(let i = 0; i < CellsBomb.length; i++){
+                    CellsBomb[i].style.backgroundColor = "red";
+                }
+                alert(" you lose :(");
+                for(let i = 0; i < Cells.length; i++){
+                    Cells[i].classList.add('disabled');
+                }
+                wrap.classList.add('disabled');
+                return;
+            }else if(isScore){
+                console.log('This is a score');
+            }
+            console.log('Normal');
+                this.style.backgroundColor = "green";
+            }
     }
-    document.querySelector('.wrap span').addEventListener("click", addStyle);
 
-
+    for(let i = 0; i < Cells.length; i++){
+        Cells[i].addEventListener('click', cellClick.bind(Cells[i]));
+    }
 }
-//=============random defalut========
+//=============random defalut==========
 function randomDefault(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
-//============generate bomb =========
+//============generate bomb ===========
 function generateBomb(){
     var Bomb = [];
     const CellCount = config.row * config.col;
