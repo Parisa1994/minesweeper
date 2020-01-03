@@ -333,7 +333,7 @@ var config = {
   row: null,
   col: null,
   bomb: null,
-  score: null
+  score: 0
 };
 var difficulty = {
   easy: 30,
@@ -386,7 +386,7 @@ function generateGame() {
   var Score = GEN_RES.Score;
   Score.forEach(function (element) {
     if (wrap.querySelector('span:nth-child(' + (element + 1) + ')')) {
-      wrap.querySelector('span:nth-child( ' + (element + 1) + ' )').setAttribute('data-score', 'true');
+      wrap.querySelector('span:nth-child( ' + (element + 1) + ' )').setAttribute('data-score', randomDefault(15, 25));
     }
   });
 
@@ -426,11 +426,14 @@ function generateGame() {
         wrap.classList.add('disabled');
         return;
       } else if (isScore) {
-        console.log('This is a score');
-        this.style.backgroundColor = "blue"; // const scoreYou = document.querySelector("#score b");
-        // const totalScore = Number(scoreYou.textContent()) + isScore;
-        // scoreyou.innerHTML(totalScore);
+        console.log('This is a score: ' + Score);
+        this.style.backgroundColor = "blue";
 
+        var _scoreYou = document.querySelector("#score b");
+
+        var _totalScore = Number(_scoreYou.textContent) + Score[0];
+
+        _scoreYou.innerHTML = _totalScore;
         return;
       }
 
@@ -492,6 +495,7 @@ var restart = document.getElementById("restart");
 restart.addEventListener('click', function () {
   generateGame(config.row, config.col, config.bomb);
   wrap.classList.remove("disabled");
+  document.querySelector('#score b').innerHTML = '0';
 }); //===============newgame===================
 
 var newgame = document.getElementById('newGame');
@@ -499,6 +503,7 @@ newgame.addEventListener('click', function () {
   document.getElementById("game").style.display = 'none';
   document.getElementById("startGame").style.display = 'flex';
   wrap.classList.remove("disabled");
+  document.querySelector('#score b').innerHTML = '0';
 });
 },{"./../styles/main.scss":"styles/main.scss","font-awesome/css/font-awesome.min.css":"node_modules/font-awesome/css/font-awesome.min.css","bootstrap/dist/css/bootstrap.min.css":"node_modules/bootstrap/dist/css/bootstrap.min.css"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];

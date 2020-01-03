@@ -143,7 +143,7 @@ var config = {
     row: null,
     col: null,
     bomb: null,
-    score: null
+    score: 0
 }
 
 var difficulty = {
@@ -197,7 +197,7 @@ function generateGame(){
     const Score = GEN_RES.Score;
     Score.forEach(element => {
         if(wrap.querySelector('span:nth-child('+ (element + 1) +')')){
-            wrap.querySelector('span:nth-child( '+ (element + 1) +' )').setAttribute('data-score', 'true');
+            wrap.querySelector('span:nth-child( '+ (element + 1) +' )').setAttribute('data-score', randomDefault(15, 25));
         }
     });
 
@@ -233,14 +233,13 @@ function generateGame(){
                 return;
 
             }else if(isScore){
-                console.log('This is a score');
+                console.log('This is a score: ' +  Score ) ;
                 this.style.backgroundColor = "blue";
-                // const scoreYou = document.querySelector("#score b");
-                // const totalScore = Number(scoreYou.textContent()) + isScore;
-                // scoreyou.innerHTML(totalScore);
+                const scoreYou = document.querySelector("#score b");
+                const totalScore = Number(scoreYou.textContent) + Score[0];
+                scoreYou.innerHTML = totalScore;
                 return;
             }
-
             console.log('Normal');
                 this.style.backgroundColor = "green";
                 const scoreYou = document.querySelector("#score b");
@@ -297,6 +296,8 @@ const restart = document.getElementById("restart");
 restart.addEventListener('click', function(){
     generateGame(config.row, config.col, config.bomb);
     wrap.classList.remove("disabled");
+    document.querySelector('#score b').innerHTML = '0';
+
 });
 
 //===============newgame===================
@@ -305,4 +306,5 @@ newgame.addEventListener('click', function(){
     document.getElementById("game").style.display = 'none';
     document.getElementById("startGame").style.display = 'flex';
     wrap.classList.remove("disabled");
+    document.querySelector('#score b').innerHTML = '0';
 });
