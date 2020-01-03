@@ -435,9 +435,10 @@ function generateGame() {
       }
 
       console.log('Normal');
-      this.style.backgroundColor = "green"; // const scoreYou = document.querySelector("#score b");
-      // const totalScore = Number(scoreYou.textContent) + 5 ;
-      // scoreyou.innerHTML(totalScore);
+      this.style.backgroundColor = "green";
+      var scoreYou = document.querySelector("#score b");
+      var totalScore = Number(scoreYou.textContent) + 5;
+      scoreYou.innerHTML = totalScore;
     }
   }
 

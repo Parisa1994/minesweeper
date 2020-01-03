@@ -240,14 +240,14 @@ function generateGame(){
                 // scoreyou.innerHTML(totalScore);
                 return;
             }
+
             console.log('Normal');
                 this.style.backgroundColor = "green";
-                // const scoreYou = document.querySelector("#score b");
-                // const totalScore = Number(scoreYou.textContent) + 5 ;
-                // scoreyou.innerHTML(totalScore);
+                const scoreYou = document.querySelector("#score b");
+                const totalScore = Number(scoreYou.textContent) + 5 ;
+                scoreYou.innerHTML = totalScore;
             }
     }
-
     for(let i = 0; i < Cells.length; i++){
         Cells[i].addEventListener('click', cellClick.bind(Cells[i]));
     }
