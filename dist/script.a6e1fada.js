@@ -445,6 +445,13 @@ var restart = document.getElementById("restart");
 restart.addEventListener('click', function () {
   generateGame(config.row, config.col, config.bomb);
   wrap.classList.remove("disabled");
+}); //===============newgame===================
+
+var newgame = document.getElementById('newGame');
+newgame.addEventListener('click', function () {
+  document.getElementById("game").style.display = 'none';
+  document.getElementById("startGame").style.display = 'flex';
+  wrap.classList.remove("disabled");
 });
 },{"./../styles/main.scss":"styles/main.scss","font-awesome/css/font-awesome.min.css":"node_modules/font-awesome/css/font-awesome.min.css","bootstrap/dist/css/bootstrap.min.css":"node_modules/bootstrap/dist/css/bootstrap.min.css"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];

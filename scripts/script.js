@@ -245,3 +245,11 @@ restart.addEventListener('click', function(){
     generateGame(config.row, config.col, config.bomb);
     wrap.classList.remove("disabled");
 });
+
+//===============newgame===================
+const newgame = document.getElementById('newGame');
+newgame.addEventListener('click', function(){
+    document.getElementById("game").style.display = 'none';
+    document.getElementById("startGame").style.display = 'flex';
+    wrap.classList.remove("disabled");
+});
