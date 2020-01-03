@@ -238,3 +238,10 @@ function generateBomb(){
     }
     return Bomb;
 }
+
+//==================restart button===========
+const restart = document.getElementById("restart");
+restart.addEventListener('click', function(){
+    generateGame(config.row, config.col, config.bomb);
+    wrap.classList.remove("disabled");
+});

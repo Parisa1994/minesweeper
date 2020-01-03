@@ -438,7 +438,14 @@ function generateBomb() {
   }
 
   return Bomb;
-}
+} //==================restart button===========
+
+
+var restart = document.getElementById("restart");
+restart.addEventListener('click', function () {
+  generateGame(config.row, config.col, config.bomb);
+  wrap.classList.remove("disabled");
+});
 },{"./../styles/main.scss":"styles/main.scss","font-awesome/css/font-awesome.min.css":"node_modules/font-awesome/css/font-awesome.min.css","bootstrap/dist/css/bootstrap.min.css":"node_modules/bootstrap/dist/css/bootstrap.min.css"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
