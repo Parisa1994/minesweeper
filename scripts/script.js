@@ -161,11 +161,12 @@ function start(){
     var lavel = document.getElementById("lavel").value;
     const TotalCells = config.row * config.col;
     config.bomb = Math.floor((TotalCells * difficulty[lavel]) / 100);
+    config.score = Math.floor(TotalCells * 10 ) / 100;
+    console.log( "fucking score: " + config.score)
     generateGame();
 };
 
 document.getElementById("start").addEventListener("click", start);
-
 //============generate Game============
 function generateGame(){
     wrap.innerHTML = '';
@@ -190,6 +191,16 @@ function generateGame(){
         }
     });
     console.log("bomb: " + Bomb);
+
+    //score
+    const Score = generateScore();
+    Score.forEach(element => {
+        if(wrap.querySelectorAll('span:nth-child('+ (element + 1) +')')[0]){
+            wrap.querySelectorAll('span:nth-child( '+ (element + 1) +' )')[0].setAttribute('data-score', 'true');
+        }
+    })
+    console.log( "score:" + Score)
+
     //css
     function cellClick(){
         const isBomb = this.getAttribute('data-bomb');
@@ -210,6 +221,8 @@ function generateGame(){
                 return;
             }else if(isScore){
                 console.log('This is a score');
+                this.style.backgroundColor = "blue";
+                return;
             }
             console.log('Normal');
                 this.style.backgroundColor = "green";
@@ -238,7 +251,20 @@ function generateBomb(){
     }
     return Bomb;
 }
-
+//=========generate score=============
+function generateScore(){
+    var Score = [];
+    const CellsCount = config.row * config.col;
+    for( let i = 0; i < config.score; i++){
+        const RND = randomDefault(0, CellsCount);
+        if( Score.indexOf(RND) === -1 ){
+            Score.push(RND);
+        }else{
+            Score.push(randomDefault(0, CellsCount))
+        }
+    }
+    return Score;
+}
 //==================restart button===========
 const restart = document.getElementById("restart");
 restart.addEventListener('click', function(){
